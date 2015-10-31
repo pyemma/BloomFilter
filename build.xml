@@ -16,7 +16,7 @@
  specific language governing permissions and limitations
  under the License.
 -->
-<project name="tutorial" default="tutorial" basedir=".">
+<project name="tutorial" default="bloomfilter" basedir=".">
 
   <description>Thrift Java Tutorial</description>
 
@@ -42,6 +42,11 @@
     <pathelement path="${build}" />
     <pathelement path="tutorial.jar" />
   </path>
+  <path id="bloomfilter.classpath">
+    <path refid="build.classpath" />
+    <pathelement path="${build}" />
+    <pathelement path="bloomfilter.jar" />
+  </path>
   
   <target name="init">
     <tstamp />
@@ -56,9 +61,9 @@
     <javac includeantruntime="false" srcdir="${src}" destdir="${build}" classpathref="build.classpath" />
   </target>
 
-  <target name="test" depends="tutorial" />
+  <!-- <target name="test" depends="tutorial" /> -->
 
-  <target name="tutorial" description="Run the tutorial" depends="compile">
+  <!-- <target name="tutorial" description="Run the tutorial" depends="compile">
     <jar jarfile="tutorial.jar" basedir="${build}"/>
     <parallel>
       <java classname="MultiplicationServer" fork="true" timeout="10000"
@@ -73,6 +78,13 @@
         </java>
       </sequential>
     </parallel>
+  </target> -->
+
+  <target name="bloomfilter" depends="compile">
+    <jar jarfile="bloomfilter.jar" basedir="${build}/bloomfilter" />
+    <java classname="bloomfilter.BloomFilter" fork="true" timeout="10000" 
+      classpathref="bloomfilter.classpath" failonerror="false" output="${build}/log/bloomfilter.log">
+    </java>
   </target>
 
   <target name="generate">
@@ -82,7 +94,7 @@
     </exec>
   </target>
 
-  <target name="tutorialclient" description="Run a tutorial client" depends="compile">
+  <!-- <target name="tutorialclient" description="Run a tutorial client" depends="compile">
     <echo>tutorial client simple:</echo>
     <java classname="JavaClient"
       classpathref="tutorial.classpath" failonerror="true">
@@ -93,13 +105,13 @@
       classpathref="tutorial.classpath" failonerror="true">
       <arg line="secure"/>
     </java>
-  </target>
+  </target> -->
 
-  <target name="tutorialserver" description="Run a tutorial server" depends="compile">
+  <!-- <target name="tutorialserver" description="Run a tutorial server" depends="compile">
       <java classname="JavaServer" fork="true"
         classpathref="tutorial.classpath" failonerror="false" output="${build}/log/tutorial.log">
       </java>
-  </target>
+  </target> -->
 
   <target name="clean">
     <delete dir="${build}" />
