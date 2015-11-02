@@ -16,7 +16,7 @@
  specific language governing permissions and limitations
  under the License.
 -->
-<project name="tutorial" default="bloomfilter" basedir=".">
+<project name="bloomfilter" default="bloomfilterservice" basedir=".">
 
   <description>Thrift Java Tutorial</description>
 
@@ -36,11 +36,6 @@
   <path id="build.classpath">
     <path refid="libs.classpath" />
     <pathelement path="${gen}" />
-  </path>
-  <path id="tutorial.classpath">
-    <path refid="build.classpath" />
-    <pathelement path="${build}" />
-    <pathelement path="tutorial.jar" />
   </path>
   <path id="bloomfilter.classpath">
     <path refid="build.classpath" />
@@ -63,25 +58,25 @@
 
   <!-- <target name="test" depends="tutorial" /> -->
 
-  <!-- <target name="tutorial" description="Run the tutorial" depends="compile">
-    <jar jarfile="tutorial.jar" basedir="${build}"/>
+  <target name="bloomfilterservice" description="Run the bloomfilterservice" depends="compile">
+    <jar jarfile="bloomfilterservice.jar" basedir="${build}"/>
     <parallel>
-      <java classname="MultiplicationServer" fork="true" timeout="10000"
-        classpathref="tutorial.classpath" failonerror="false" output="${build}/log/tutorial.log">
+      <java classname="BloomFilterServer" fork="true" timeout="10000"
+        classpathref="bloomfilter.classpath" failonerror="false" output="${build}/log/bloomfilter.log">
       </java>
       <sequential>
         <sleep seconds="2"/>
-        <echo>tutorial client simple:</echo>
-        <java classname="MultiplicationClient"
-          classpathref="tutorial.classpath" failonerror="true">
+        <echo>Bloom Filter Client:</echo>
+        <java classname="BloomFilterClient"
+          classpathref="bloomfilter.classpath" failonerror="true">
           <arg line="simple"/>
         </java>
       </sequential>
     </parallel>
-  </target> -->
+  </target>
 
   <target name="bloomfilter" depends="compile">
-    <jar jarfile="bloomfilter.jar" basedir="${build}/bloomfilter" />
+    <!-- <jar jarfile="bloomfilter.jar" basedir="${build}/bloomfilter" /> -->
     <java classname="bloomfilter.BloomFilter" fork="true" timeout="10000" 
       classpathref="bloomfilter.classpath" failonerror="false" output="${build}/log/bloomfilter.log">
     </java>
@@ -90,7 +85,7 @@
   <target name="generate">
     <!-- Generate the thrift gen-java source -->
     <exec executable="thrift" failonerror="true">
-      <arg line="--gen java -r  ./sample.thrift"/>
+      <arg line="--gen java -r  ./bloomfilterservice.thrift"/>
     </exec>
   </target>
 

@@ -1,2 +1,5 @@
-Bloom Filter contains apple: true
-Bloom Filter contains pineapple: false
+Starting the simple server...
+Operation: add apple
+Operation: add banana
+Operation: contain apple
+Operation: contain pineapple
