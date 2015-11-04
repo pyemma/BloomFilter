@@ -31,9 +31,9 @@ public class BloomFilterClient {
   private static void perform(BloomFilterService.Client client) throws TException
   {
 
-      client.add("apple");
-      client.add("banana");
-      System.out.println("Is apple there? " + client.contain("apple"));
-      System.out.println("Is pineapple there? " + client.contain("pineapple"));
+      client.add(new Person("Yang", "Pei", 24, "pyemma1991@gmail.com"));
+      client.add(new Person("Haruka", "Uami", 20, "haruka@gmail.com"));
+      System.out.println("Is Yang there? " + client.contain(new Person("Yang", "Pei", 24, "pyemma1991@gmail.com")));
+      System.out.println("Is Mashiro there? " + client.contain(new Person("Mashiro", "Shina", 19, "mashiro@gmail.com")));
   }
 }

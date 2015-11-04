@@ -18,10 +18,10 @@ public class BloomFilterServer {
 
 	public static void main(String[] args) {
 		try {
-			List<Hashable<String>> functions = new ArrayList<Hashable<String>>();
-			functions.add(new StringHash(17));
-			functions.add(new StringHash(23));
-			functions.add(new StringHash(31));
+			List<Hashable<Person>> functions = new ArrayList<Hashable<Person>>();
+			functions.add(new PersonHash(17));
+			functions.add(new PersonHash(23));
+			functions.add(new PersonHash(31));
 			BloomFilterHandler handler = new BloomFilterHandler(functions, 1000);
 			processor = new BloomFilterService.Processor(handler);
 

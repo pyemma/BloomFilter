@@ -1,5 +1,5 @@
 Starting the simple server...
-Operation: add apple
-Operation: add banana
-Operation: contain apple
-Operation: contain pineapple
+Operation: add Person(firstName:Yang, lastName:Pei, age:24, email:pyemma1991@gmail.com)
+Operation: add Person(firstName:Haruka, lastName:Uami, age:20, email:haruka@gmail.com)
+Operation: contain Person(firstName:Yang, lastName:Pei, age:24, email:pyemma1991@gmail.com)
+Operation: contain Person(firstName:Mashiro, lastName:Shina, age:19, email:mashiro@gmail.com)
